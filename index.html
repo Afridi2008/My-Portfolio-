@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> MY PORTFOLIO | AFRIDI MOHAMED J</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Fraunces:ital,wght@0,700;0,900;1,700&family=Caveat:wght@600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f5f0d0;
+      --dark-red: #630601;
+      --red: #c0182a;
+      --sandal: #F0F462;
+      --pink: #350101;
+      --lavender: #c8b8e8;
+      --yellow-green: #e8f0a0;
+      --white: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--cream);
+      font-family: 'Space Mono', monospace;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CUSTOM CURSOR */
+    .cursor {
+      width: 18px;
+      height: 18px;
+      background: var(--red);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, background 0.2s;
+      mix-blend-mode: difference;
+    }
+
+    .cursor.big {
+      transform: translate(-50%, -50%) scale(3.5);
+      background: var(--cream);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: rgba(36, 0, 4, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--red);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s;
+    }
+
+    nav.nav-hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span {
+      color: var(--red);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.80rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--red);
+    }
+
+    /* PAGE TRANSITION OVERLAY */
+    .page-transition-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .pto-stripe {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 20%;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    .pto-stripe:nth-child(1) {
+      top: 0%;
+    }
+
+    .pto-stripe:nth-child(2) {
+      top: 20%;
+      background: var(--dark-red);
+    }
+
+    .pto-stripe:nth-child(3) {
+      top: 40%;
+    }
+
+    .pto-stripe:nth-child(4) {
+      top: 60%;
+      background: var(--dark-red);
+    }
+
+    .pto-stripe:nth-child(5) {
+      top: 80%;
+    }
+
+    /* SECTIONS */
+    section {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Section separator lines */
+    section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 5%;
+      right: 5%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--red), transparent);
+      opacity: 0.4;
+    }
+
+    /* ─────── SECTION TRANSITION CLASSES ─────── */
+
+    /* Fade + rise (default) */
+    .trans-fade {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+
+    .trans-fade.in-view {
+      animation: fadeRise 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes fadeRise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Slide from left */
+    .trans-left {
+      opacity: 0;
+      transform: translateX(-80px);
+    }
+
+    .trans-left.in-view {
+      animation: slideLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes slideLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Slide from right */
+    .trans-right {
+      opacity: 0;
+      transform: translateX(80px);
+    }
+
+    .trans-right.in-view {
+      animation: slideRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes slideRight {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Scale pop */
+    .trans-pop {
+      opacity: 0;
+      transform: scale(0.88);
+    }
+
+    .trans-pop.in-view {
+      animation: scalePop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes scalePop {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Flip card */
+    .trans-flip {
+      opacity: 0;
+      transform: perspective(800px) rotateX(20deg) translateY(40px);
+    }
+
+    .trans-flip.in-view {
+      animation: flipIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes flipIn {
+      to {
+        opacity: 1;
+        transform: perspective(800px) rotateX(0deg) translateY(0);
+      }
+    }
+
+    /* Skew wipe */
+    .trans-skew {
+      opacity: 0;
+      transform: skewY(3deg) translateY(50px);
+    }
+
+    .trans-skew.in-view {
+      animation: skewIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes skewIn {
+      to {
+        opacity: 1;
+        transform: skewY(0deg) translateY(0);
+      }
+    }
+
+    /* Stagger delays */
+    .td-1 {
+      animation-delay: 0.05s !important;
+    }
+
+    .td-2 {
+      animation-delay: 0.12s !important;
+    }
+
+    .td-3 {
+      animation-delay: 0.19s !important;
+    }
+
+    .td-4 {
+      animation-delay: 0.26s !important;
+    }
+
+    .td-5 {
+      animation-delay: 0.33s !important;
+    }
+
+    .td-6 {
+      animation-delay: 0.40s !important;
+    }
+
+    /* Section background transitions */
+    section.sec-appears {
+      animation: secBgReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes secBgReveal {
+      from {
+        clip-path: inset(0 100% 0 0);
+      }
+
+      to { 
+        clip-path: inset(0 0% 0 0);
+      }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      display: flex;
+      max-width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 40px 80px;
+      background-color: var(--dark-red);
+      background: url("0_Abstract_Art_Optical_Illusion_1280x720.mp4") center/cover no-repeat  ;
+      background-attachment: fixed;
+    
+      
+         
+    }
+
+
+.hero{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+}
+
+.bg-video{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  top:0;
+  left:0;
+  z-index:-2;
+  opacity: 0.2;
+}
+
+.image-overlay{
+  position:absolute;
+  inset:0;
+  background:url("bg.jpg") center/cover;
+ 
+}
+    .hero-folder {
+      position: relative;
+      display: block;
+      background: url("walljustmecopy.JPG") center/cover no-repeat;
+      border-radius: 4px 24px 24px 4px;
+      padding: 70px 80px 60px;
+      max-width: 820px;
+      width: 100%;
+      height: 520px;
+      box-shadow: 12px 12px 12px rgba(255, 0, 0, 0.329), 24px 24px 24px rgba(139, 1, 1, 0.541);
+    
+      animation: floatFolder 4s ease-in-out infinite, heroEntrance 3s cubic-bezier(0.22, 1, 0.36, 1) both, floatfolder 4s ease-in infinite;
+    }
+
+    @keyframes heroEntrance {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(40px) rotate(-2deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0) rotate(-1deg);
+      }
+    }
+
+    @keyframes floatFolder {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(-1deg);
+      }
+
+      50% {
+        transform: translateY(-12px) rotate(0.5deg);
+      }
+    }
+
+    .folder-tab {
+      position: absolute;
+      top: -28px;
+      left: 40px;
+      background: var(--pink);
+      width: 140px;
+      height: 36px;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .folder-label {
+      position: absolute;
+      top: 18px;
+      left: 48px;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: underline;
+      font-weight: 700;
+    }
+
+    .clip {
+      position: absolute;
+      top: 14px;
+      right: 28px;
+      width: 32px;
+      height: 60px;
+      border: 4px solid var(--red);
+      border-radius: 20px 20px 0 0;
+      border-bottom: none;
+    }
+
+    .clip::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 4px;
+      width: 16px;
+      height: 20px;
+      border: 4px solid var(--red);
+      border-radius: 0 0 12px 12px;
+      border-top: none;
+    }
+
+    .hero-name {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
+      color: var(--red);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      display: block;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      border: 3px solid var(--dark-red);
+      border-radius: 50%;
+      padding: 8px 18px;
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem;
+      color: var(--dark-red);
+      margin: 8px 0;
+      transform: rotate(-5deg);
+      vertical-align: middle;
+      animation: badgeSpin 0.8s 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    @keyframes badgeSpin {
+      from {
+        opacity: 0;
+        transform: rotate(-30deg) scale(0.6);
+      }
+
+      to {
+        opacity: 1;
+        transform: rotate(-5deg) scale(1);
+      }
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+      color: var(--dark-red);
+      letter-spacing: 0.06em;
+      margin-top: 18px;
+      animation: fadeRise 0.7s 1s both;
+    }
+
+    .hero-cta {
+      margin-top: 36px;
+      display: inline-block;
+      background: var(--cream);
+      color: var(--dark-red);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border-radius: 2px;
+      text-decoration: none;
+      box-shadow: 4px 4px 0 var(--dark-red);
+      transition: transform 0.15s, box-shadow 0.15s;
+      animation: fadeRise 0.7s 1.2s both;
+    }
+
+    .hero-cta:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--dark-red);
+    }
+
+    /* SCROLL HINT */
+    .scroll-hint {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeRise 0.7s 1.5s both;
+    }
+
+    .scroll-hint span {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(92, 10, 20, 0.5);
+    }
+
+    .scroll-arrow {
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--red), transparent);
+      position: relative;
+      animation: scrollDrop 1.5s ease-in-out infinite;
+    }
+
+    @keyframes scrollDrop {
+
+      0%,
+      100% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scaleY(0.5);
+        opacity: 0.4;
+      }
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--dark-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 48px;
+      gap: 72px;
+    }
+
+    .about-photo-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .about-folder-card {
+      background: var(--cream);
+      border-radius: 4px 20px 20px 4px;
+      padding: 40px 32px 32px;
+      position: relative;
+      box-shadow: 8px 8px 0 var(--red);
+      width: 300px;
+      height: 400px;
+    }
+
+    .about-folder-card .folder-tab {
+      top: -24px;
+      left: 24px;
+      width: 100px;
+      height: 28px;
+      background: var(--pink);
+    }
+
+    .about-folder-card .clip {
+      top: 12px;
+      right: 16px;
+      width: 24px;
+      height: 44px;
+    }
+
+    .photo-placeholder {
+      width: 260px;
+      height: 350px;
+      background: url(myphoto.png );
+      background-size: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      color: white;
+      text-align: center;
+      border: 3px solid var(--dark-red);
+    }
+
+    .about-text {
+      max-width: 480px;
+    }
+
+    .section-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--yellow-green);
+      margin-bottom: 10px;
+      text-decoration: underline;
+    }
+
+    .about-greeting {
+      font-family: 'Caveat', cursive;
+      font-size: 2.6rem;
+      color: var(--cream);
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+
+    .about-body {
+      font-size: 0.88rem;
+      line-height: 1.9;
+      color: rgba(245, 240, 208, 0.85);
+      max-width: 420px;
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--cream);
+      color: var(--dark-red);
+  
+       padding: 100px 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: start;
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      color: var(--red);
+      margin-bottom: 60px;
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      max-width: 960px;
+      width: 100%;
+      padding: 0;
+    }
+
+    .service-card {
+      background: var(--yellow-green);
+      border: 2px solid var(--dark-red);
+      border-radius: 4px;
+      padding: 28px 28px;
+      box-shadow: 6px 6px 0 var(--red);
+      transition: transform 0.2s, box-shadow 0.2s;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .service-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 9px 9px 0 var(--red);
+    }
+
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .service-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.05rem;
+      color: var(--dark-red);
+      margin-bottom: 6px;
+    }
+
+    .service-card p {
+      font-size: 0.75rem;
+      color: rgba(92, 10, 20, 0.7);
+      line-height: 1.7;
+    }
+
+    /* ── PROCESS ── */
+    #process {
+      background: var(--dark-red);
+      padding: 100px 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: start;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+      max-width: 960px;
+      width: 100%;
+      align-content: center;
+    }
+
+
+
+
+
+
+    .skill-progress-bg {
+      background: var(--red);
+      width: 100%;
+      height: 8px;
+      border-radius: 10px;
+      display: inline-flex;
+    }
+
+    .skill-progress-fill {
+      background: var(--cream);
+      height: 100%;
+      border-radius: inherit;
+      display: block;
+    }
+
+
+
+    .process-step {
+      text-align: flex-start;
+      position: relative;
+
+    }
+
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border: 1.5px solid var(--red);
+      border-radius: 50%;
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      color: var(--red);
+      margin-bottom: 14px;
+      background: var(--dark-red);
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .process-step:hover .step-num {
+      background: var(--red);
+      color: var(--cream);
+    }
+
+    .process-step h3 {
+      font-size: 1.5 rem;
+      letter-spacing: 0.03em;
+      color: var(--cream);
+      line-height: 1.5;
+      display: inline;
+      align-self: center;
+      text-align: center;
+    }
+
+    /* ── SAMPLES ── */
+    #samples {
+      background: var(--cream);
+      padding: 100px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .samples-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 40px;
+      border-bottom: 2px solid var(--dark-red);
+    }
+
+    .tab-btn {
+      background: none;
+      border: 2px solid var(--dark-red);
+      border-bottom: none;
+      padding: 10px 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: none;
+      color: var(--dark-red);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .tab-btn.active,
+    .tab-btn:hover {
+      background: var(--dark-red);
+      color: var(--cream);
+    }
+
+    .samples-content {
+      
+     
+      width: 100%;
+    }
+
+    .tab-panel {
+      display: none;
+      align-content: center;
+    }
+
+    .tab-panel.active {
+      display: block;
+      animation: fadeRise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+ .video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  justify-items: center;
+  padding: 60px 0;
+  width: 100%;
+ }
+
+ .video-mockup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dark-red);
+  color: var(--cream);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  padding: 28px 24px;
+  box-shadow: 4px 4px 0 var(--red);
+  transition: transform 0.2s, box-shadow 0.2s;
+ }
+
+ .video-mockup:hover {
+  transform: translateY(5px);
+ 
+ }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .photo-card {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 4px 4px 0 var(--red);
+      position: relative;
+      transition: transform 0.2s;
+    }
+
+    .photo-card:hover {
+      transform: scale(1.03) rotate(-1deg);
+    }
+
+    .photo-card .ph-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Caveat', cursive;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      padding: 10px;
+    }
+
+    .pc1 {
+      background: linear-gradient(135deg, #d4bec8, #b09ab0);
+    }
+
+    .pc2 {
+      background: linear-gradient(135deg, #808080, #505050);
+    }
+
+    .pc3 {
+      background: linear-gradient(135deg, #88aa88, #558855);
+    }
+
+    .pc4 {
+      background: linear-gradient(135deg, #d8d0c0, #b0a890);
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials {
+      background: var(--dark-red);
+      
+      display: grid;
+      flex-direction: row;
+    padding: 100px 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: start;
+    }
+
+    .testimonials-wrap {
+      display: grid;
+      gap: 40px;
+      max-width: 860px;
+      width: 100%;
+    }
+
+    .testi-card {
+      background: var(--yellow-green);
+      border-radius: 4px 20px 20px 4px;
+      padding: 50px 36px 36px;
+      position: relative;
+      box-shadow: 8px 8px 0 var(--red);
+      flex: 1;
+      transform: rotate(-1deg);
+      transition: transform 0.2s;
+    }
+
+    .testi-card:nth-child(2) {
+      transform: rotate(1.5deg);
+    }
+
+    .testi-card:hover {
+      transform: rotate(0deg) translateY(-4px);
+    }
+
+    .testi-card .folder-tab {
+      top: -22px;
+      left: 24px;
+      width: 90px;
+      height: 26px;
+      background: var(--pink);
+    }
+
+    .testi-card .clip {
+      top: 10px;
+      right: 14px;
+      width: 20px;
+      height: 38px;
+    }
+
+    .testi-quote {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.25rem;
+      color: var(--dark-red);
+      line-height: 1.0;
+      margin-bottom: 18px;
+    }
+
+    .testi-author {
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    /* ── PACKAGES ── */
+    #packages {
+      background: var(--cream);
+      color: var(--dark-red);
+      padding: 100px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+      max-width: 960px;
+      width: 100%;
+      align-items: end;
+    }
+
+    .pkg-card {
+      border: 2px solid var(--dark-red);
+      border-radius: 4px;
+      padding: 36px 28px;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .pkg-card:nth-child(1) {
+      background: var(--yellow-green);
+      box-shadow: 6px 6px 0 var(--red);
+    }
+
+    .pkg-card:nth-child(2) {
+      background: var(--pink);
+      box-shadow: 6px 6px 0 var(--red);
+      transform: scale(1.04);
+    }
+
+    .pkg-card:nth-child(3) {
+      background: var(--lavender);
+      box-shadow: 6px 6px 0 var(--red);
+    }
+
+    .pkg-card:hover {
+      transform: translate(-3px, -4px) scale(1.01);
+      box-shadow: 10px 10px 0 var(--red);
+    }
+
+    .pkg-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 3px solid var(--red);
+      border-radius: 50%;
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+
+    .pkg-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.6rem;
+      color: var(--red);
+      margin-bottom: 4px;
+    }
+
+    .pkg-price {
+      font-family: 'Fraunces', serif;
+      font-size: 1.9rem;
+      color: var(--dark-red);
+      margin-bottom: 20px;
+    }
+
+    .pkg-features {
+      list-style: none;
+    }
+
+    .pkg-features li {
+      font-size: 0.78rem;
+      color: var(--dark-red);
+      padding: 7px 0;
+      border-bottom: 1px dashed rgba(92, 10, 20, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pkg-features li::before {
+      content: '✓';
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .pkg-custom {
+      text-align: center;
+      margin-top: 36px;
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      color: var(--dark-red);
+      opacity: 0.75;
+    }
+
+    /* ── FAQ ── */
+    #faq {
+      background: var(--dark-red);
+      padding: 100px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .faq-list {
+      max-width: 760px;
+      width: 100%;
+    }
+
+    .faq-item {
+      background: var(--yellow-green);
+      border-radius: 4px 16px 16px 4px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      box-shadow: 6px 6px 0 var(--red);
+      position: relative;
+    }
+
+    .faq-item:nth-child(2) {
+      background: var(--pink);
+    }
+
+    .faq-item:nth-child(3) {
+      background: var(--lavender);
+    }
+
+    .faq-q {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.04em;
+      padding: 22px 28px 6px;
+    }
+
+    .faq-a {
+      font-size: 0.82rem;
+      color: var(--dark-red);
+      padding: 0 28px 22px;
+      line-height: 1.8;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--cream);
+      padding: 80px 48px 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-folder {
+      background: var(--dark-red);
+      border-radius: 4px 24px 24px 4px;
+      padding: 70px 72px 60px;
+      max-width: 720px;
+      width: 100%;
+      box-shadow: 12px 12px 0 var(--red);
+      position: relative;
+      display: flex;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .contact-folder .folder-tab {
+      top: -28px;
+      left: 40px;
+      width: 120px;
+      height: 32px;
+      background: var(--pink);
+    }
+
+    .contact-folder .clip {
+      top: 16px;
+      right: 30px;
+      width: 28px;
+      height: 52px;
+      
+    }
+
+    .contact-left h2 {
+      font-family: 'Caveat', cursive;
+      font-size: 2.8rem;
+      color: var(--yellow-green);
+       text-shadow: var(--red) 0 3px 0;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .contact-right {
+      flex-shrink: 0;
+    }
+
+    .contact-name {
+      font-family: 'Fraunces', serif;
+      font-size: 2rem;
+      color: var(--cream);
+      line-height: 0.95;
+      margin-bottom: 6px;
+      text-shadow: var(--red) 0 3px 0;
+    }
+
+    .contact-badge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .contact-badge {
+      border: 2px solid var(--dark-red);
+      border-radius: 50%;
+      padding: 4px 12px;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      color: var(--dark-red);
+      display: inline-block;
+     
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-info a {
+      font-size: 0.78rem;
+      color: var(--dark-red);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+       background-color: var(--yellow-green);
+       padding: 3%;
+       border-radius: 10px;
+       box-shadow: #c0182a 0 3px 0;
+    }
+
+    .contact-info a:hover {
+      color: var(--red);
+    }
+
+    .contact-info .ci-icon {
+      font-size: 1rem;
+    }
+
+    footer {
+      background: #3a0509;
+      text-align: center;
+      padding: 22px;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: rgba(245, 240, 208, 0.4);
+    }
+
+    /* ── SECTION DIVIDER TRANSITIONS ── */
+    .section-divider {
+      position: relative;
+      height: 80px;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .section-divider svg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Diagonal cut lines between sections */
+    .divider-dark-to-cream {
+      background: var(--dark-red);
+    }
+
+    .divider-cream-to-dark {
+      background: var(--cream);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav {
+        padding: 14px 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-folder {
+        padding: 50px 32px 40px;
+      }
+
+      #about {
+        flex-direction: column;
+        padding: 80px 24px;
+        gap: 40px;
+      }
+
+      .services-grid,
+      .process-grid,
+      .packages-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .video-grid {
+        grid-template-columns: 1fr;
+        padding: 40px 0;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .testimonials-wrap {
+        flex-direction: column;
+      }
+
+      .contact-folder {
+        flex-direction: column;
+        gap: 30px;
+        padding: 50px 32px 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="cursor" id="cursor"></div>
+
+  <!-- PAGE TRANSITION OVERLAY -->
+  <div class="page-transition-overlay" id="pto">
+    <div class="pto-stripe"></div>
+    <div class="pto-stripe"></div>
+    <div class="pto-stripe"></div>
+    <div class="pto-stripe"></div>
+    <div class="pto-stripe"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <div class="nav-logo">My <span>Portfolio</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Education</a></li>
+      <li><a href="#samples">Skills</a></li>
+      <li><a href="#packages">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    
+    <div class="image-overlay"></div>
+    <div class="hero-folder">
+      <div class="folder-tab"></div>
+      <span class="folder-label">My Portfolio</span>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <a href="#contact" class="hero-cta">Let's Work Together →</a>
+    </div>
+    
+  </section>
+
+  <!-- DIVIDER hero → about -->
+  <div class="section-divider divider-dark-to-cream">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <polygon points="0,80 1440,0 1440,80" fill="var(--dark-red)" />
+    </svg>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-photo-wrap trans-left td-1">
+      <div class="about-folder-card">
+        <div class="folder-tab"></div>
+        <div class="clip"></div>
+        <div class="photo-placeholder">
+
+        </div>
+      </div>
+    </div>
+    <div class="about-text trans-right td-2">
+      <div class="section-eyebrow">About me</div>
+      <div class="about-greeting">Hi, I'm Afridi Mohamed J</div>
+      <p class="about-body">
+      <h3>UI/UX Designer & Frontend developer</h3><br>I'm Graphic Designer And UI/UX Designer from Tiruchirappalli,
+      working in web development and print media. I enjoy turning complex problems into simple, beautiful and intuitive
+      designs.
+
+      My job is to build your website so that it is functional and user-friendly but at the same time attractive.
+      Moreover, I add personal touch to your product and make sure that is eye-catching and easy to use. My aim is to
+      bring across your message and identity in the most creative way. I created web design for many famous brand
+      companies.</p>
+    </div>
+  </section>
+
+  <!-- DIVIDER about → services -->
+  <div class="section-divider divider-dark-to-cream">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <polygon points="0,0 1440,80 0,80" fill="var(--cream)" />
+    </svg>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <h2 class="section-title trans-fade td-1">My Education</h2>
+    <div class="services-grid">
+      <div class="service-card trans-flip td-1">
+        <div class="service-icon"></div>
+        <h3>B.E Computer Science & Engineering</h3>
+        <h5><b>K.Ramakrishnan Collge Of Technology (KRCT), Tiruchirappalli.</b></h5>
+        <p>Grade: 8 CGPA</p>
+        <p>Aug 2025 - 2029</p>
+      </div>
+      <br>
+      <div class="service-card trans-flip td-1">
+        <div class="service-icon"></div>
+        <h3>HSE - 2nd Year (12th) </h3>
+        <h5><b>Rice City Matric Higher Secondary School , Aduthurai.</b></h5>
+        <p>Grade: 85.5%</p>
+        <p>Aug 2024 - 2025</p>
+      </div>
+      <br>
+      <div class="service-card trans-flip td-1">
+        <div class="service-icon"></div>
+        <h3>SSLC (10th) </h3>
+        <h5><b>Rice City Matric Higher Secondary School , Aduthurai.</b></h5>
+        <p>Grade: 86%</p>
+        <p>Aug 2022 - 2023</p>
+      </div>
+    </div>
+
+  </section>
+
+
+
+  <!-- PROCESS -->
+  <section id="process">
+    <h2 class="section-title reveal" style="color:var(--cream);">My Skills</h2>
+    <div class="process-grid">
+      <div class="process-step reveal reveal-delay">
+        <div class="step-num">#</div>
+        <h3>HTML</h3>
+        <div class="skill-progress-bg">
+          <div class="skill-progress-fill" style="width: 90%;"></div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="process-step reveal reveal-delay">
+        <div class="step-num">#</div>
+        <h3>CSS</h3>
+        <div class="skill-progress-bg">
+          <div class="skill-progress-fill" style="width: 75%;"></div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="process-step reveal reveal-delay">
+        <div class="step-num">#</div>
+        <h3>Java Script</h3>
+        <div class="skill-progress-bg">
+          <div class="skill-progress-fill" style="width: 30%;"></div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="process-step reveal reveal-delay">
+        <div class="step-num">#</div>
+        <h3>Python</h3>
+        <div class="skill-progress-bg">
+          <div class="skill-progress-fill" style="width: 40%;"></div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="process-step reveal reveal-delay">
+        <div class="step-num">#</div>
+        <h3>C</h3>
+        <div class="skill-progress-bg">
+          <div class="skill-progress-fill" style="width: 50%;"></div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="process-step reveal reveal-delay">
+        <div class="step-num">#</div>
+        <h3>Adobe Photoshop</h3>
+        <div class="skill-progress-bg">
+          <div class="skill-progress-fill" style="width: 95%;"></div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="process-step reveal reveal-delay">
+        <div class="step-num">#</div>
+        <h3>Adobe Illustrator</h3>
+        <div class="skill-progress-bg">
+          <div class="skill-progress-fill" style="width: 80%;"></div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="process-step reveal reveal-delay">
+        <div class="step-num">#</div>
+        <h3>Canva</h3>
+        <div class="skill-progress-bg">
+          <div class="skill-progress-fill" style="width: 90%;"></div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="process-step reveal reveal-delay">
+        <div class="step-num">#</div>
+        <h3>Figma</h3>
+        <div class="skill-progress-bg">
+          <div class="skill-progress-fill" style="width: 40%;"></div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="process-step reveal reveal-delay">
+        <div class="step-num">#</div>
+        <h3>Github</h3>
+        <div class="skill-progress-bg">
+          <div class="skill-progress-fill" style="width: 50%;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- DIVIDER process → samples -->
+  <div class="section-divider divider-dark-to-cream">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,0 Q360,80 720,40 Q1080,0 1440,60 L1440,80 L0,80 Z" fill="var(--cream)" />
+    </svg>
+  </div>
+
+  <!-- SAMPLES -->
+  <section id="samples">
+    <h2 class="section-title trans-fade td-1">My Projects & Work Samples</h2>
+    <div class="samples-content trans-skew td-2">
+      <div class="samples-tabs">
+        <button class="tab-btn active" onclick="switchTab('videos', this)">Web Projects</button>
+        
+      </div>
+      <div id="tab-videos" class="tab-panel active">
+        <div class="video-grid">
+          <div class="video-mockup">
+           <a href="https://afridi2008.github.io/KR-Map/" style="color: var(--cream);"><h2>KR MAP</h2></a> 
+            
+          </div>
+          <br>
+          <div class="video-mockup">
+          <a href="https://afridi2008.github.io/Periodic-Table/" style="color: var(--cream);"> <h2>Periodic Element Viewer</h2></a>
+           
+          </div>
+          <br>
+          <div class="video-mockup">
+          
+          <a href="https://afridi2008.github.io/CGPA-Calculator/" style="color: var(--cream);">  <h2>CGPA Calculator</h2></a>
+          </div>
+          <br>
+          <div class="video-mockup">
+        
+          <a href="https://afridi2008.github.io/Calculator/" style="color: var(--cream);"> <h2>Basic Calculator</h2></a>
+          </div>
+          <br>
+          <div class="video-mockup">
+          
+          <a href="https://afridi2008.github.io/Ramadan-Playlist/" style="color: var(--cream);"> <h2> Music Playlist</h2></a>
+          </div>
+          <br>
+          <div class="video-mockup ">
+       <a href="https://afridi2008.github.io/MH-Digital-Printers---adt/" style="color: var(--cream);">  <h2>MH Digital (E commerce )</h2></a>
+          </div>
+          <br>
+        </div>
+        
+
+  </section>
+
+  <!-- DIVIDER samples → testimonials -->
+  <div class="section-divider divider-cream-to-dark">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <polygon points="0,80 1440,0 1440,80" fill="var(--dark-red)" />
+    </svg>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <h2 class="section-title trans-fade td-1" style="color:var(--cream);">My Certifications</h2>
+    <div class="testimonials-wrap">
+      
+      
+      
+      
+      
+     
+      
+      <div class="testi-card trans-right td-3">
+        <div class="folder-tab"></div>
+        <div class="clip"></div>
+        <p class="testi-quote"> Python For Beginners</p>
+        <div class="testi-author">By Simplilearn</div>
+      </div>
+      <div class="testi-card trans-left td-2">
+        <div class="folder-tab"></div>
+        <div class="clip"></div>
+        <p class="testi-quote">Certificate in Office Automation</p>
+        <div class="testi-author">By Bharathidhasan University (BDU) </div>
+      </div>
+      <div class="testi-card trans-right td-3">
+        <div class="folder-tab"></div>
+        <div class="clip"></div>
+        <p class="testi-quote">Hindi Parichaya Examination - Certificate</p>
+        <div class="testi-author">By Hindi Parichaya Examination.</div>
+      </div>
+      <div class="testi-card trans-right td-3">
+        <div class="folder-tab"></div>
+        <div class="clip"></div>
+        <p class="testi-quote"> Certificate in Programming Skil</p>
+        <div class="testi-author">By Bharathidhasan University (BDU)</div>
+      </div>
+      <div class="testi-card trans-right td-3">
+        <div class="folder-tab"></div>
+        <div class="clip"></div>
+        <p class="testi-quote">certificate in web development and accessibility</p>
+        <div class="testi-author">By Microsoft </div>
+      </div>
+      <div class="testi-card trans-right td-3">
+        <div class="folder-tab"></div>
+        <div class="clip"></div>
+        <p class="testi-quote"> Graphic Design Essential</p>
+        <div class="testi-author">By Canva</div>
+      </div>
+       <div class="testi-card trans-right td-3">
+        <div class="folder-tab"></div>
+        <div class="clip"></div>
+        <p class="testi-quote"> Visual Suite</p>
+        <div class="testi-author">By Canva</div>
+      </div>
+      <div class="testi-card trans-right td-3">
+        <div class="folder-tab"></div>
+        <div class="clip"></div>
+        <p class="testi-quote"> Presenting Data</p>
+        <div class="testi-author">By HP LIFE</div>
+      </div>
+    </div>
+  </section>
+
+ 
+
+   <!-- DIVIDER samples → testimonials -->
+  <div class="section-divider divider-cream-to-dark">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <polygon points="0,80 1440,0 1440,80" fill="var(--cream)" />
+    </svg>
+  </div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-folder trans-pop td-2">
+      <div class="folder-tab"></div>
+      <div class="clip"></div>
+      <div class="contact-left">
+        <h2>Let's Work Together!</h2>
+      </div>
+      <div class="contact-right">
+        <div class="contact-name">Afridi<br>Mohamed J</div>
+       
+        <div class="contact-info">
+          <a href="tel:+1234567890"><img src="call.png" width="20px"
+                    height="20px">AT Call</a>
+          <a href="mailto:afridimohamed9741@gail.com"><img src="mail.png" width="20px"
+                    height="20px">At Mail</a>
+          <a href="https://www.linkedin.com/in/afridimohamed-j" ><img src="link.png" width="20px"
+                    height="20px">At Linkedin</a>
+          <a href="https://www.instagram.com/mr_afridi_mohamed?igsh=MWczZHM5anRxMTJ1NA==" ><img src="insta.png" width="20px"
+                    height="20px">At Instagram</a>
+          <a href="https://wa.me/917010284532"><img src="wa.png" width="20px"
+                    height="20px">At Whatsapp</a>
+           <a href="https://github.com/Afridi2008"><img src="git.png" width="20px"
+                    height="20px">At Github</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 - Afridi Mohamed - Portfolio</footer>
+
+  <script>
+
+
+    
+    // ── CUSTOM CURSOR ──
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, .service-card, .pkg-card, .process-step').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+    });
+
+    // ── NAV HIDE ON SCROLL ──
+    let lastScroll = 0;
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      const cur = window.scrollY;
+      if (cur > lastScroll && cur > 80) nav.classList.add('nav-hidden');
+      else nav.classList.remove('nav-hidden');
+      lastScroll = cur;
+    });
+
+    // ── SECTION ENTRANCE TRANSITIONS ──
+    // Observer for trans-* elements (scroll-triggered)
+    const transObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          transObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.trans-fade, .trans-left, .trans-right, .trans-pop, .trans-flip, .trans-skew')
+      .forEach(el => transObserver.observe(el));
+
+    // ── NAV ANCHOR TRANSITIONS ──
+    // Stripe wipe when clicking nav links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+
+        const stripes = document.querySelectorAll('.pto-stripe');
+        const totalDuration = 500;
+        const staggerMs = 60;
+
+        // Animate stripes in (left to right = scaleX 0→1)
+        stripes.forEach((s, i) => {
+          s.style.transition = 'none';
+          s.style.transform = 'scaleX(0)';
+          s.style.transformOrigin = 'left';
+          setTimeout(() => {
+            s.style.transition = `transform ${totalDuration}ms cubic-bezier(0.7,0,0.3,1)`;
+            s.style.transform = 'scaleX(1)';
+          }, i * staggerMs);
+        });
+
+        // After fully covered, scroll, then wipe out
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: 'instant' });
+
+          // Wipe out (right to left = origin right, scaleX 1→0)
+          stripes.forEach((s, i) => {
+            s.style.transformOrigin = 'right';
+            setTimeout(() => {
+              s.style.transition = `transform ${totalDuration}ms cubic-bezier(0.7,0,0.3,1)`;
+              s.style.transform = 'scaleX(0)';
+            }, i * staggerMs);
+          });
+        }, stripes.length * staggerMs + totalDuration + 80);
+      });
+    });
+
+    // ── TABS ──
+    function switchTab(id, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+
+</html>
